@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recee — Legal</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap');
+
+  :root {
+    --neon: #00FF41;
+    --neon-dim: #00CC33;
+    --neon-glow: rgba(0,255,65,0.15);
+    --bg: #0A0A0A;
+    --card: #111111;
+    --border: #1A1A1A;
+    --text: #FFFFFF;
+    --text-dim: #888888;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* Scanline effect */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,255,65,0.01) 2px,
+      rgba(0,255,65,0.01) 4px
+    );
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 22px;
+    color: var(--neon);
+    text-shadow: 0 0 20px rgba(0,255,65,0.6);
+    letter-spacing: 4px;
+    text-decoration: none;
+  }
+
+  .logo span {
+    color: var(--text-dim);
+    font-size: 11px;
+    display: block;
+    letter-spacing: 2px;
+    text-shadow: none;
+    margin-top: 2px;
+  }
+
+  nav {
+    display: flex;
+    gap: 8px;
+  }
+
+  nav a {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: all 0.2s;
+    text-transform: uppercase;
+  }
+
+  nav a:hover, nav a.active {
+    border-color: var(--neon);
+    color: var(--neon);
+    background: var(--neon-glow);
+    box-shadow: 0 0 12px rgba(0,255,65,0.2);
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* Section toggle */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .page-title {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--neon);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .meta {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .meta strong {
+    color: var(--neon);
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--neon);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 40px 0 16px;
+    padding-left: 16px;
+    border-left: 3px solid var(--neon);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 24px 0 8px;
+    letter-spacing: 1px;
+  }
+
+  p {
+    color: #CCCCCC;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+
+  ul, ol {
+    color: #CCCCCC;
+    padding-left: 24px;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+
+  li {
+    margin-bottom: 8px;
+  }
+
+  li::marker {
+    color: var(--neon);
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--neon);
+    padding: 20px 24px;
+    margin: 24px 0;
+    box-shadow: 0 0 20px rgba(0,255,65,0.05);
+  }
+
+  .card p { margin-bottom: 0; }
+
+  .highlight {
+    color: var(--neon);
+    font-weight: 600;
+  }
+
+  .contact-box {
+    background: var(--card);
+    border: 1px solid var(--neon);
+    padding: 24px;
+    margin-top: 40px;
+    box-shadow: 0 0 30px rgba(0,255,65,0.1);
+  }
+
+  .contact-box h3 {
+    color: var(--neon);
+    font-family: 'Share Tech Mono', monospace;
+    letter-spacing: 3px;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .contact-box a {
+    color: var(--neon);
+    text-decoration: none;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 14px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    border: 1px solid var(--neon-dim);
+    color: var(--neon-dim);
+    margin: 2px;
+    text-transform: uppercase;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 14px;
+  }
+
+  th {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--neon);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--neon);
+    background: rgba(0,255,65,0.05);
+  }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    color: #CCCCCC;
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+  }
+
+  footer span { color: var(--neon); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      RECEE
+      <span>SCAN. SAVE. CLAIM.</span>
+    </a>
+    <nav>
+      <a href="#" class="active" id="nav-privacy" onclick="showSection('privacy')">Privacy Policy</a>
+      <a href="#" id="nav-terms" onclick="showSection('terms')">Terms of Service</a>
+    </nav>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- PRIVACY POLICY -->
+  <div class="section active" id="section-privacy">
+    <div class="page-title">// LEGAL DOCUMENT</div>
+    <h1>Privacy Policy</h1>
+    <div class="meta">
+      Last updated: <strong>1 June 2025</strong> &nbsp;·&nbsp; 
+      Effective date: <strong>1 June 2025</strong> &nbsp;·&nbsp;
+      Version: <strong>1.0.0</strong>
+    </div>
+
+    <div class="card">
+      <p>Recee ("we", "our", or "us") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect your data when you use the Recee mobile application.</p>
+    </div>
+
+    <h2>1. Information We Collect</h2>
+
+    <h3>Account Information</h3>
+    <ul>
+      <li>Email address (for account creation and authentication)</li>
+      <li>Display name and profile photo (optional)</li>
+      <li>Password (stored securely, encrypted — we never see your plain-text password)</li>
+    </ul>
+
+    <h3>Receipt & Financial Data</h3>
+    <ul>
+      <li>Receipt images you capture or upload</li>
+      <li>Extracted receipt data (merchant name, date, items, amounts)</li>
+      <li>AI analysis results (tax relief categorisation)</li>
+      <li>Categories, tags, and notes you add</li>
+      <li>Financial summaries generated from your receipts</li>
+    </ul>
+
+    <h3>Usage Data</h3>
+    <ul>
+      <li>App features used and frequency</li>
+      <li>Scan counts and credit usage</li>
+      <li>Subscription and purchase history</li>
+      <li>Notification preferences</li>
+    </ul>
+
+    <h3>Device Information</h3>
+    <ul>
+      <li>Device type and operating system (for compatibility)</li>
+      <li>Camera and storage access (only when you use these features)</li>
+      <li>Push notification tokens (if you enable notifications)</li>
+    </ul>
+
+    <h2>2. How We Use Your Information</h2>
+    <table>
+      <tr>
+        <th>Purpose</th>
+        <th>Data Used</th>
+      </tr>
+      <tr>
+        <td>Provide core app features (scanning, storage, tracking)</td>
+        <td>Receipt images, extracted data, account info</td>
+      </tr>
+      <tr>
+        <td>AI tax relief analysis (LHDN Malaysia)</td>
+        <td>Receipt text data sent to AI for processing</td>
+      </tr>
+      <tr>
+        <td>Account authentication and security</td>
+        <td>Email, password hash</td>
+      </tr>
+      <tr>
+        <td>Process payments and subscriptions</td>
+        <td>Email, purchase history (via RevenueCat)</td>
+      </tr>
+      <tr>
+        <td>Send notifications you've enabled</td>
+        <td>Push token, preferences</td>
+      </tr>
+      <tr>
+        <td>Show relevant advertisements (Free plan)</td>
+        <td>Ad identifier (via Google AdMob)</td>
+      </tr>
+      <tr>
+        <td>Improve app performance and fix bugs</td>
+        <td>Anonymised usage data</td>
+      </tr>
+    </table>
+
+    <h2>3. Data Storage & Security</h2>
+    <p>Your data is stored securely using <span class="highlight">Supabase</span> infrastructure hosted in Singapore (Southeast Asia region). We implement:</p>
+    <ul>
+      <li>Row-level security — you can only access your own data</li>
+      <li>Encrypted data transmission (HTTPS/TLS)</li>
+      <li>Private storage buckets — your receipt images are not publicly accessible</li>
+      <li>Secure authentication via industry-standard protocols</li>
+    </ul>
+
+    <div class="card">
+      <p>⚠️ <strong>7-Year Retention Policy:</strong> In compliance with Malaysian LHDN requirements, receipts are retained for a minimum of 7 years. You will be warned before any receipt deletion that may violate this policy.</p>
+    </div>
+
+    <h2>4. Third-Party Services</h2>
+    <p>We use the following trusted third-party services:</p>
+
+    <div style="margin: 16px 0;">
+      <span class="tag">Supabase</span>
+      <span class="tag">Google Cloud Vision</span>
+      <span class="tag">Anthropic Claude AI</span>
+      <span class="tag">RevenueCat</span>
+      <span class="tag">Google AdMob</span>
+      <span class="tag">Expo</span>
+    </div>
+
+    <ul>
+      <li><strong>Supabase</strong> — Database and file storage. Privacy policy: supabase.com/privacy</li>
+      <li><strong>Google Cloud Vision</strong> — OCR processing of receipt images. Privacy policy: policies.google.com/privacy</li>
+      <li><strong>Anthropic Claude AI</strong> — AI analysis for tax relief categorisation. Privacy policy: anthropic.com/privacy</li>
+      <li><strong>RevenueCat</strong> — Subscription and in-app purchase management. Privacy policy: revenuecat.com/privacy</li>
+      <li><strong>Google AdMob</strong> — Advertising for Free plan users. Privacy policy: policies.google.com/privacy</li>
+    </ul>
+
+    <h2>5. Your Rights</h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li><strong>Access</strong> — Request a copy of all your data (via Settings → Export My Data)</li>
+      <li><strong>Correction</strong> — Update or correct your personal information</li>
+      <li><strong>Deletion</strong> — Delete your account and all associated data (via Settings → Delete Account)</li>
+      <li><strong>Portability</strong> — Export your data in a standard format</li>
+      <li><strong>Opt-out</strong> — Disable non-essential notifications and personalised ads</li>
+    </ul>
+
+    <h2>6. Children's Privacy</h2>
+    <p>Recee is not intended for users under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us immediately.</p>
+
+    <h2>7. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. We will notify you of significant changes via in-app notification and by updating the "Last updated" date above. Continued use of Recee after changes constitutes acceptance of the updated policy.</p>
+
+    <div class="contact-box">
+      <h3>// CONTACT US</h3>
+      <p style="color: #CCCCCC; margin-bottom: 8px;">For privacy-related questions or to exercise your rights:</p>
+      <a href="mailto:adnin.bakar619@gmail.com">adnin.bakar619@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- TERMS OF SERVICE -->
+  <div class="section" id="section-terms">
+    <div class="page-title">// LEGAL DOCUMENT</div>
+    <h1>Terms of Service</h1>
+    <div class="meta">
+      Last updated: <strong>1 June 2025</strong> &nbsp;·&nbsp;
+      Effective date: <strong>1 June 2025</strong> &nbsp;·&nbsp;
+      Version: <strong>1.0.0</strong>
+    </div>
+
+    <div class="card">
+      <p>By downloading, installing, or using the Recee mobile application, you agree to be bound by these Terms of Service. Please read them carefully before using the app.</p>
+    </div>
+
+    <h2>1. Acceptance of Terms</h2>
+    <p>These Terms of Service ("Terms") govern your use of the Recee mobile application ("App") operated by Recee ("we", "us", or "our"). By using the App, you confirm that you are at least 13 years of age and agree to these Terms.</p>
+
+    <h2>2. Description of Service</h2>
+    <p>Recee is a receipt management and financial tracking application that provides:</p>
+    <ul>
+      <li>AI-powered receipt scanning and data extraction</li>
+      <li>Malaysia LHDN income tax relief analysis and categorisation</li>
+      <li>Cloud storage for receipts (minimum 7-year retention)</li>
+      <li>Financial tracking and reporting tools</li>
+      <li>Subscription and credit-based access tiers</li>
+    </ul>
+
+    <h2>3. User Accounts</h2>
+    <ul>
+      <li>You are responsible for maintaining the confidentiality of your account credentials</li>
+      <li>You are responsible for all activities that occur under your account</li>
+      <li>You must provide accurate and current information when creating an account</li>
+      <li>You must notify us immediately of any unauthorised use of your account</li>
+      <li>One account per person — creating multiple accounts to abuse free credits is prohibited</li>
+    </ul>
+
+    <h2>4. Subscription Plans & Credits</h2>
+
+    <h3>Free Plan</h3>
+    <ul>
+      <li>10 credits per month, automatically renewed on the 1st of each month</li>
+      <li>Maximum 50 receipts in storage</li>
+      <li>Advertisements displayed</li>
+      <li>1-year receipt retention</li>
+    </ul>
+
+    <h3>Pro Plan (RM9.99/month or RM89.99/year)</h3>
+    <ul>
+      <li>100 credits per month</li>
+      <li>Unlimited receipt storage</li>
+      <li>No advertisements</li>
+      <li>7-year receipt retention</li>
+      <li>PDF export and tax relief alerts</li>
+    </ul>
+
+    <h3>Credit Packs</h3>
+    <ul>
+      <li>Credits are non-refundable once purchased</li>
+      <li>Credits do not expire as long as your account is active</li>
+      <li>Credits cannot be transferred between accounts</li>
+    </ul>
+
+    <h3>Subscriptions</h3>
+    <ul>
+      <li>Subscriptions auto-renew unless cancelled at least 24 hours before the renewal date</li>
+      <li>Manage or cancel subscriptions through your Google Play account settings</li>
+      <li>No refunds for partial subscription periods</li>
+    </ul>
+
+    <h2>5. Acceptable Use</h2>
+    <p>You agree NOT to:</p>
+    <ul>
+      <li>Upload fraudulent, fake, or altered receipts</li>
+      <li>Use the app to make false tax relief claims</li>
+      <li>Attempt to reverse-engineer or tamper with the app</li>
+      <li>Use automated tools to interact with the app</li>
+      <li>Share your account with others</li>
+      <li>Abuse the rewarded ad system to gain credits unfairly</li>
+      <li>Upload content that is illegal, offensive, or violates others' rights</li>
+    </ul>
+
+    <h2>6. Tax Information Disclaimer</h2>
+    <div class="card">
+      <p>⚠️ <strong>Important:</strong> The tax relief analysis provided by Recee is for <strong>informational and reference purposes only</strong>. It is based on AI interpretation of LHDN guidelines and may not be 100% accurate. Recee is <strong>not a licensed tax advisor</strong>. Always verify your tax relief claims with a qualified tax professional or directly with LHDN before filing. We are not liable for any tax penalties arising from incorrect claims made based on Recee's analysis.</p>
+    </div>
+
+    <h2>7. Intellectual Property</h2>
+    <p>The Recee app, including its design, code, logo, and content, is owned by us and protected by intellectual property laws. You are granted a limited, non-exclusive licence to use the app for personal, non-commercial purposes.</p>
+    <p>Your receipt data and financial information remain your property. By using the app, you grant us a limited licence to process this data solely to provide the app's services.</p>
+
+    <h2>8. Limitation of Liability</h2>
+    <p>To the maximum extent permitted by Malaysian law, Recee shall not be liable for:</p>
+    <ul>
+      <li>Any indirect, incidental, or consequential damages</li>
+      <li>Loss of data due to technical failures (though we maintain backups)</li>
+      <li>Inaccuracies in AI-generated tax relief analysis</li>
+      <li>Third-party service interruptions (Supabase, Google, etc.)</li>
+      <li>Any financial decisions made based on app data</li>
+    </ul>
+
+    <h2>9. Termination</h2>
+    <p>We reserve the right to suspend or terminate your account if you violate these Terms. You may delete your account at any time via Settings → Delete Account. Upon account deletion, your data will be permanently removed within 30 days, subject to any legal retention requirements.</p>
+
+    <h2>10. Governing Law</h2>
+    <p>These Terms are governed by the laws of <span class="highlight">Malaysia</span>. Any disputes shall be subject to the exclusive jurisdiction of the courts of Malaysia.</p>
+
+    <h2>11. Changes to Terms</h2>
+    <p>We may update these Terms from time to time. We will notify you of significant changes via in-app notification. Continued use of the app after changes constitutes acceptance of the updated Terms.</p>
+
+    <div class="contact-box">
+      <h3>// CONTACT US</h3>
+      <p style="color: #CCCCCC; margin-bottom: 8px;">For questions about these Terms:</p>
+      <a href="mailto:adnin.bakar619@gmail.com">adnin.bakar619@gmail.com</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <span>RECEE</span> &nbsp;·&nbsp; © 2025 &nbsp;·&nbsp; ALL RIGHTS RESERVED &nbsp;·&nbsp; MALAYSIA
+</footer>
+
+<script>
+  function showSection(section) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+    document.getElementById('section-' + section).classList.add('active');
+    document.getElementById('nav-' + section).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return false;
+  }
+</script>
+
+</body>
+</html>
